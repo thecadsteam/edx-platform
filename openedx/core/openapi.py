@@ -2,9 +2,12 @@
 Open API support.
 """
 
+import textwrap
+
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema as drf_swagger_auto_schema
 
 openapi_info = openapi.Info(
     title="Open edX API",
@@ -20,3 +23,21 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
+
+
+def swagger_auto_schema(**kwargs):
+    """
+    Decorator for documenting an OpenAPI endpoint.
+
+    Identical to `drf_yasg.utils.swagger_auto_schema`__ except that
+    description fields will be dedented properly.  All description fields
+    should be in Markdown.
+
+    __ https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html#drf_yasg.utils.swagger_auto_schema
+
+    """
+    if 'operation_description' in kwargs:
+        kwargs['operation_description'] = textwrap.dedent(kwargs['operation_description'])
+    for param in kwargs.get('manual_parameters', ()):
+        param.description = textwrap.dedent(param.description)
+    return drf_swagger_auto_schema(**kwargs)
