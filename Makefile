@@ -1,5 +1,6 @@
 # Do things in edx-platform
-.PHONY: clean docs extract_translations help pull pull_translations push_translations requirements shell upgrade
+.PHONY: clean extract_translations help pull pull_translations push_translations requirements shell upgrade
+.PHONY: api-docs docs guides swagger
 
 # Careful with mktemp syntax: it has to work on Mac and Ubuntu, which have differences.
 PRIVATE_FILES := $(shell mktemp -u /tmp/private_files.XXXXXX)
@@ -18,7 +19,17 @@ clean: ## archive and delete most git-ignored files
 	tar xf $(PRIVATE_FILES)
 	rm $(PRIVATE_FILES)
 
-docs: ## build the developer documentation for this repository
+SWAGGER = docs/swagger.yaml
+
+docs: api-docs guides ## build all the developer documentation for this repository
+
+swagger: ## generate the swagger.yaml file
+	DJANGO_SETTINGS_MODULE=docs.docs_settings python manage.py lms generate_swagger -o $(SWAGGER)
+
+api-docs: swagger	## build the REST api docs
+	cd docs/api; make html
+
+guides:	## build the developer guide docs
 	cd docs/guides; make clean html
 
 extract_translations: ## extract localizable strings from sources
