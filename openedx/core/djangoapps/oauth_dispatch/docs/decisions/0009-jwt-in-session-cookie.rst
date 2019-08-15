@@ -62,7 +62,7 @@ Login -> Cookie -> API
      * Enable HTTPOnly_ so the signature is unavailable to JS code. See `JWT Cookie Security`_ below.
 
 #. **Automatically recombine and extract the JWT from Cookies on API calls.** 
-     * We will create a new middleware that will reconstitute the divided JWT from its two cookies and store the
+     * A new middleware JwtAuthCookieMiddleware will reconstitute the divided JWT from its two cookies and store the
        recombined JWT in a temporary cookie specified by JWT_AUTH_COOKIE_.
      * The `Django Rest Framework JWT`_ library we use makes use of the JWT_AUTH_COOKIE_ configuration setting.
        When set, the JSONWebTokenAuthentication_ class `automatically extracts the JWT from the cookie`_. Since all
@@ -81,6 +81,7 @@ Login -> Cookie -> API
      * To prevent this issue, we will introduce a new HTTP header called "HTTP_USE_JWT_COOKIE" that will be selectively
        set only by microfrontends that want to use JWT cookie based authentication. The new middleware will check for
        this header before trying to reconstitute and use the JWT token.
+     * An alternative solution to force use of "HTTP_USE_JWT_COOKIE" for a particular endpoint and still get login redirects is to use the new JwtRedirectToLoginIfUnauthenticatedMiddleware in conjunction with the new LoginRedirectIfUnauthenticated permission class on the endpoint.
 
 .. _`Lightrail's design`: https://medium.com/lightrail/getting-token-authentication-right-in-a-stateless-single-page-application-57d0c6474e3
 .. _Django Rest Framework JWT: https://getblimp.github.io/django-rest-framework-jwt/
