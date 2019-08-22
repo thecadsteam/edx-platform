@@ -38,6 +38,8 @@ class Command(BaseCommand):
              'must already be a git repository. Usage: '
              ' git_export <course_loc> <git_url>')
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         parser.add_argument('course_loc')
         parser.add_argument('git_url')

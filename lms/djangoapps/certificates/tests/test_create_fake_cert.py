@@ -47,7 +47,7 @@ class CreateFakeCertTest(TestCase):
 
     def test_too_few_args(self):
         with self.assertRaisesRegexp(CommandError, 'Error: too few arguments'):
-            self._run_command(self.USERNAME)
+            self._run_command()
 
     def _run_command(self, *args, **kwargs):
         """Run the management command to generate a fake cert. """

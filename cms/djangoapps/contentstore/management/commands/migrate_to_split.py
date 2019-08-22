@@ -23,6 +23,8 @@ class Command(BaseCommand):
     help = "Migrate a course from old-Mongo to split-Mongo. The new org, course, and run will " \
            "default to the old one unless overridden."
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         parser.add_argument('course_key')
         parser.add_argument('email')

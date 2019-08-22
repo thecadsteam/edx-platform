@@ -20,6 +20,8 @@ class Command(BaseCommand):
     """
     help = 'Export the specified course into a directory'
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         parser.add_argument('course_id')
         parser.add_argument('output_path')

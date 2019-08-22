@@ -17,6 +17,8 @@ class Command(BaseCommand):
     |--commit|: optional argument. If not provided, will dry run delete
     '''
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         parser.add_argument('course_id')
         parser.add_argument('--commit', action='store_true', help='Commit to deleting the orphans')

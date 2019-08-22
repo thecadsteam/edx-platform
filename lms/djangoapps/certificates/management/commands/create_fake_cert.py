@@ -28,6 +28,8 @@ class Command(BaseCommand):
     """Create a fake certificate for a user in a course. """
     help = dedent(__doc__).strip()
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         parser.add_argument(
             'username',

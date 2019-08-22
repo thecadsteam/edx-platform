@@ -31,6 +31,8 @@ class Command(BaseCommand):
             '\n{0}'.format(_('Import the specified git repository and optional branch into the '
                              'modulestore and optionally specified directory.')))
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         # Positional arguments
         parser.add_argument('repository_url')

@@ -26,6 +26,8 @@ class Command(BaseCommand):
     If you do not specify '--commit', the command will print out what changes would be made.
     '''
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         parser.add_argument('course_key', help="ID of the Course to force publish")
         parser.add_argument('--commit', action='store_true', help="Pull updated metadata from external IDPs")

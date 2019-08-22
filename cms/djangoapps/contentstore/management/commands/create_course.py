@@ -25,6 +25,8 @@ class Command(BaseCommand):
     # can this query modulestore for the list of write accessible stores or does that violate command pattern?
     help = u"Create a course in one of {}".format([ModuleStoreEnum.Type.mongo, ModuleStoreEnum.Type.split])
 
+    missing_args_message = "too few arguments"
+
     def add_arguments(self, parser):
         parser.add_argument('modulestore',
                             choices=MODULESTORE_CHOICES,
