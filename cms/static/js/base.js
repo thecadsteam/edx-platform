@@ -98,8 +98,8 @@ define([
             $('a[rel="external"]:not([title])')
                 .attr('title', gettext('This link will open in a new browser window/tab'));
             $('a[rel="external"]').attr({
-              'rel': 'noopener',
-              'target': '_blank'
+                rel: 'noopener',
+                target: '_blank'
             });
 
             // general link management - lean modal window
