@@ -184,7 +184,7 @@ class SystemTestSuite(PytestSuite):
                     .format('{}.envs.{}'.format(self.root, self.settings),
                             self.disable_courseenrollment_history)
                 xdist_string = u'--tx {}*ssh="jenkins@{} -o StrictHostKeyChecking=no"' \
-                               '//python="source edx-venv/bin/activate; {}; python"' \
+                               '//python="source edx-venv-${PYTHON_VERSION}/bin/activate; {}; python"' \
                                '//chdir="edx-platform"' \
                                .format(xdist_remote_processes, ip, env_var_cmd)
                 cmd.append(xdist_string)
@@ -310,7 +310,7 @@ class LibTestSuite(PytestSuite):
                     .format(django_env_var_cmd, self.disable_courseenrollment_history)
 
                 xdist_string = u'--tx {}*ssh="jenkins@{} -o StrictHostKeyChecking=no"' \
-                               '//python="source edx-venv/bin/activate; {}; python"' \
+                               '//python="source edx-venv-${PYTHON_VERSION}/bin/activate; {}; python"' \
                                '//chdir="edx-platform"' \
                                .format(xdist_remote_processes, ip, env_var_cmd)
                 cmd.append(xdist_string)
